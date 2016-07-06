@@ -1,0 +1,128 @@
+{% extends "index.html" %}
+
+{% block nav %}
+{% endblock %}
+
+{% block fbpixel %}
+
+
+
+<!-- Facebook Conversion Code for Registrations - PubHub 1 -->
+<!--<script>(function() {
+var _fbq = window._fbq || (window._fbq = []);
+if (!_fbq.loaded) {
+var fbds = document.createElement('script');
+fbds.async = true;
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(fbds, s);
+_fbq.loaded = true;
+}
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6030973445319', {'value':'0.00','currency':'ZAR'}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6030973445319&amp;cd[value]=0.00&amp;cd[currency]=ZAR&amp;noscript=1" /></noscript>-->
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '779786798729614');
+fbq('track', "PageView");
+fbq('track', 'CompleteRegistration');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=779786798729614&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+{% endblock %}
+
+{% block main %}
+
+	<div class="row container">
+		<div class="col s12">
+			
+			<h4>Thank You for your response. <span id="referred_container" class="hide"> Sit back and wait for the call. </span> </h4>
+
+			<div id="refer_container">
+
+				<h5>Refer a friend?</h5>
+
+				<form method="post" action="/employee/refer/email">
+					<div class="row">
+						
+							<div class="col s12">
+								<label for="sender_email">Your email address</label>
+								{% if sender_email %}
+									<input name="sender_email" type="email" id="sender_email" value="{{sender_email}}" />
+								{% else %}
+						      		<input name="sender_email" type="email" id="sender_email" />
+						      	{% endif %}
+							</div>
+
+							<div class="col s12">
+								<label for="recipient_email">Your friend's email address</label>
+						      	<input name="recipient_email" type="email" id="recipient_email" />
+							</div>
+
+							<p id="error_msg" class="error"></p>
+
+							<input type="submit" class="btn" value="Send">
+
+						</div>
+				</form>
+
+			</div>
+
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block script %}
+	
+	<script type="text/javascript">
+		$("body").on("submit", "form", function(e){
+
+			e.preventDefault();
+
+			var $this = $(this);
+
+			var action = $this.attr("action");
+			var method = $this.attr("method");
+
+			var sender_email = $("#sender_email").val();
+			var recipient_email = $("#recipient_email").val();
+
+			if ( sender_email && recipient_email ){
+
+				function success(data){
+					if( data["message"] == "success" ){
+						$("#refer_container").addClass("hide");
+						$("#referred_container").removeClass("hide");
+					};
+				};
+
+				$.ajax({
+					url: action,
+					type: method,
+					data: {"sender_email": sender_email, "recipient_email": recipient_email},
+					success: success
+				})
+
+			}else{
+				$("#error_msg").text("Please include both your email and your friend'e email")
+			}
+
+
+		});
+	</script>
+
+{% endblock %}
+

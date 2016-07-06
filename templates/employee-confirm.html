@@ -1,0 +1,475 @@
+{% extends "index.html" %}
+
+{% block nav %}
+{% endblock %}
+
+{% block main %}
+
+	<div class="row">
+		<div class="col s12 container">
+			<form id="employee-confirm-form" action="/confirm" method="post">
+
+				<div class="row">
+					<div class="col s12">
+						<h3>Welcome to the PubHub</h3>
+						<p>Welcome to PubHub, the free service industry recruitment app.</p>
+						<p>Sign up for free and get access to bar, restaurant, and hotel jobs in your area.</p>
+						<p>This service is offered for free to benefit you and your job search.</p>
+						<p>Please fill in all your details accurately, if any details are found to be false your details will be removed from the database.</p>
+						<!-- 
+	"    Welcome to PubHub, the free service industry recruitment app.
+          Sign up for free and get access to bar, restaurant, and hotel jobs in your area.
+          This service is offered for free to benefit you and your job search.
+          Please fill in all your details accurately, if any details are found to be false your details will be removed from the database. "
+						 -->
+						<!-- <p>Fill out your new CV and let the jobs find you.</p> -->
+						<br><br>
+					</div>
+				</div>
+
+				{% if error_no_name %}
+				<div class="row">
+					<div class="col s12 center">
+						<p class="error">Please provide your name.</p>
+					</div>
+				</div>
+				{% endif %}
+
+				<div class="row">
+					<div class="col s12">
+						<label for="name">Name</label>
+				      	<input name="name" type="text" id="name" value="{{name|check_none}}"/>
+					</div>
+				</div>
+				
+				<div class="row">
+					
+					<div class="col s12">
+						<p>
+							Are you male or female? 
+						</p>
+						<p>
+							{% if gender and gender == 'male' %}
+								<input name="gender" type="radio" id="genderm" value="male" checked="checked" />
+							{% else %}
+								<input name="gender" type="radio" id="genderm" value="male"/>
+							{% endif %}
+					      <label for="genderm">male</label>
+					      	{% if gender and gender == 'female' %}
+								<input name="gender" type="radio" id="genderf" value="female" checked="checked"/>
+							{% else %}
+								<input name="gender" type="radio" id="genderf" value="female"/>
+							{% endif %}
+					      <label for="genderf">female</label>
+					    </p>
+					</div>
+
+				</div>
+
+				{% if error_no_location %}
+				<div class="row">
+					<div class="col s12 center">
+						<!-- <p class="error">Please provide at least a suburb or city as your location</p> -->
+						<p class="error">Please provide a valid street postal code.</p>
+					</div>
+				</div>
+				{% endif %}
+
+				<div class="row">
+					<div class="col s12">
+						<label for="postal_code">Postal Code ( eg. 8001 )</label>
+						{% if postal_code %}
+				      		<input name="postal_code" type="number" id="postal_code" value="{{postal_code.postal_code|check_none}}"/>
+				      	{% else %}
+				      		<input name="postal_code" type="number" id="postal_code" value=""/>
+				      	{% endif %}
+				      	{% if postal_code %}
+				      		<input type="hidden" id="postal_code_id" name="postal_code_id" value="{{postal_code.key.id()}}">
+				      	{% else %}
+				      		<input type="hidden" id="postal_code_id" name="postal_code_id" value="">
+				      	{% endif %}
+				      	<p id="postal_code_area" class="hide" style="text-transform:capitalize;color:#CE6700;font-size:1.2rem;">yoyo</p>
+					</div>
+				</div>
+
+				{% if error_no_craft %}
+				<div class="row">
+					<div class="col s12 center">
+						<p class="error">Please include your experience</p>
+					</div>
+				</div>
+				{% endif %}
+
+				<div class="row">
+					
+					<div class="col s12">
+						<p>
+							Do you have bartending experience?
+						</p>
+						<p>
+							{% if bartender == 'yes' %}
+								<input name="bartender" type="radio" id="bartendery" value="yes" checked="checked" />
+								<label for="bartendery">yes</label>
+								<input name="bartender" type="radio" id="bartendern" value="no"/>
+								<label for="bartendern">no</label>
+							{% elif bartender == 'no' %}
+								<input name="bartender" type="radio" id="bartendery" value="yes"/>
+								<label for="bartendery">yes</label>
+								<input name="bartender" type="radio" id="bartendern" value="no" checked="checked" />
+								<label for="bartendern">no</label>
+							{% else %}
+								<input name="bartender" type="radio" id="bartendery" value="yes"/>
+								<label for="bartendery">yes</label>
+								<input name="bartender" type="radio" id="bartendern" value="no" />
+								<label for="bartendern">no</label>
+							{% endif %}
+					    </p>
+					</div>
+
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12">
+						<p>
+							Do you have management experience?
+						</p>
+						<p>
+							{% if manager == 'yes' %}
+								<input name="manager" type="radio" id="managementy" value="yes" checked="checked" />
+								<label for="managementy">yes</label>
+								<input name="manager" type="radio" id="managementn" value="no"/>
+								<label for="managementn">no</label>
+							{% elif manager == 'no' %}
+								<input name="manager" type="radio" id="managementy" value="yes"/>
+								<label for="managementy">yes</label>
+								<input name="manager" type="radio" id="managementn" value="no" checked="checked" />
+								<label for="managementn">no</label>
+							{% else %}
+								<input name="manager" type="radio" id="managementy" value="yes"/>
+								<label for="managementy">yes</label>
+								<input name="manager" type="radio" id="managementn" value="no" />
+								<label for="managementn">no</label>
+							{% endif %}
+
+					    </p>
+					</div>
+
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12">
+						<p>
+							Do you have waitering experience?
+						</p>
+						<p>
+							{% if waiter == 'yes' %}
+								<input name="waiter" type="radio" id="waiteringy" value="yes" checked="checked" />
+								<label for="waiteringy">yes</label>
+								<input name="waiter" type="radio" id="waiteringn" value="no"/>
+								<label for="waiteringn">no</label>
+							{% elif waiter == 'no' %}
+								<input name="waiter" type="radio" id="waiteringy" value="yes"/>
+								<label for="waiteringy">yes</label>
+								<input name="waiter" type="radio" id="waiteringn" value="no" checked="checked" />
+								<label for="waiteringn">no</label>
+							{% else %}
+								<input name="waiter" type="radio" id="waiteringy" value="yes"/>
+								<label for="waiteringy">yes</label>
+								<input name="waiter" type="radio" id="waiteringn" value="no" />
+								<label for="waiteringn">no</label>
+							{% endif %}
+
+					    </p>
+					</div>
+
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12">
+						<p>
+							Do you have kitchen experience?
+						</p>
+						<p>
+							{% if kitchen == 'yes' %}
+								<input name="kitchen" type="radio" id="kitcheny" value="yes" checked="checked" />
+								<label for="kitcheny">yes</label>
+								<input name="kitchen" type="radio" id="kitchenn" value="no"/>
+								<label for="kitchenn">no</label>
+							{% elif kitchen == 'no' %}
+								<input name="kitchen" type="radio" id="kitcheny" value="yes"/>
+								<label for="kitcheny">yes</label>
+								<input name="kitchen" type="radio" id="kitchenn" value="no" checked="checked" />
+								<label for="kitchenn">no</label>
+							{% else %}
+								<input name="kitchen" type="radio" id="kitcheny" value="yes"/>
+								<label for="kitcheny">yes</label>
+								<input name="kitchen" type="radio" id="kitchenn" value="no" />
+								<label for="kitchenn">no</label>
+							{% endif %}
+
+					    </p>
+					</div>
+
+				</div>
+
+				<div class="row">
+					
+					<div class="col s12">
+						<p>
+							Do you have any certified training in your chosen field?
+						</p>
+						<p>
+							{% if received_training == 'yes' %}
+								<input name="received_training" type="radio" id="received_trainingy" value="yes" checked="checked" />
+								<label for="received_trainingy">yes</label>
+								<input name="received_training" type="radio" id="received_trainingn" value="no"/>
+								<label for="received_trainingn">no</label>
+							{% elif received_training == 'no' %}
+								<input name="received_training" type="radio" id="received_trainingy" value="yes"/>
+								<label for="received_trainingy">yes</label>
+								<input name="received_training" type="radio" id="received_trainingn" value="no" checked="checked" />
+								<label for="received_trainingn">no</label>
+							{% else %}
+								<input name="received_training" type="radio" id="received_trainingy" value="yes"/>
+								<label for="received_trainingy">yes</label>
+								<input name="received_training" type="radio" id="received_trainingn" value="no" />
+								<label for="received_trainingn">no</label>
+							{% endif %}
+
+					    </p>
+					</div>
+
+				</div>
+
+				{% if error_no_mobile %}
+				<div class="row">
+					<div class="col s12 center">
+						<p class="error">Please provide a contact number</p>
+					</div>
+				</div>
+				{% endif %}
+
+				<div class="row">
+					
+					<div class="col s12">
+						<label for="phone">Please provide your mobile telephone number</label>
+				      	<input name="phone" type="tel" id="phone" value="{{phone|check_none}}" />
+					</div>
+
+				</div>
+
+				{% if error_no_email %}
+				<div class="row">
+					<div class="col s12 center">
+						<p class="error">Please provide an email address</p>
+					</div>
+				</div>
+				{% endif %}
+
+				{% if email %}
+
+					<input type="hidden" name="email" value="{{email}}">
+
+				{% else %}
+					<div class="row">
+					
+						<div class="col s12">
+							<label for="email">Please provide your email address</label>
+					      	<input name="email" type="email" id="email" />
+						</div>
+
+					</div>
+				{% endif %}
+
+				<!-- <div class="row">
+					
+					<div class="col s12">
+						<p>
+							Are you available to start working soon?
+						</p>
+						<p>
+					      {% if canwork == 'yes' %}
+								<input name="canwork" type="radio" id="canworky" value="yes" checked="checked" />
+								<label for="canworky">yes</label>
+								<input name="canwork" type="radio" id="canworkn" value="no"/>
+								<label for="canworkn">no</label>
+							{% elif canwork == 'no' %}
+								<input name="canwork" type="radio" id="canworky" value="yes"/>
+								<label for="canworky">yes</label>
+								<input name="canwork" type="radio" id="canworkn" value="no" checked="checked" />
+								<label for="canworkn">no</label>
+							{% else %}
+								<input name="canwork" type="radio" id="canworky" value="yes"/>
+								<label for="canworky">yes</label>
+								<input name="canwork" type="radio" id="canworkn" value="no" />
+								<label for="canworkn">no</label>
+							{% endif %}
+					    </p>
+					</div>
+
+				</div> -->
+				<input type="hidden" name="canwork" value="yes"></input>
+
+				<div class="row" style="margin-top:4rem;margin-bottom:4rem;">
+					<div class="col s12 m4">
+						<label for="reference_name">Please enter your previous workplace</label>
+				      	<input name="reference_name" type="text" id="reference_name" value="{{reference_name|check_none}}" placeholder="eg. ROYALE EATERY"  maxlength="16"/>
+					</div>
+					<div class="col s12 m4">
+						<label for="reference_duration">For how long</label>
+				      	<input name="reference_duration" type="text" id="reference_duration" value="{{reference_duration|check_none}}" placeholder="eg. 2 years"  maxlength="10"/>
+					</div>
+					<!-- <div class="col s12 m4">
+						<label for="reference_contact">What is their contact number?</label>
+				      	<input name="reference_contact" type="text" id="reference_contact" value="{{reference_contact|check_none}}" placeholder="eg. +27 11 123 4567"/>
+					</div> -->
+				</div>
+
+				{% if error_no_skill %}
+				<div class="row">
+					<div class="col s12 center">
+						<p class="error">Please provide at least one skill</p>
+					</div>
+				</div>
+				{% endif %}
+
+				<div class="row">
+					<div class="col s12">
+						<p>Please select your previous work experience:</p>
+						<p>
+					      	<!-- <input type="checkbox" id="coffee" /> -->
+					      	{% if coffee %}
+								<input name="coffee" type="checkbox" id="coffee" value="yes" checked="checked" />
+							{% else %}
+								<input name="coffee" type="checkbox" id="coffee" value="yes"/>
+							{% endif %}
+					      	<label for="coffee">coffee experience</label>
+					    </p>
+					    <p>
+					    	{% if wine %}
+								<input name="wine" type="checkbox" id="wine" value="yes" checked="checked" />
+							{% else %}
+								<input name="wine" type="checkbox" id="wine" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="wine" /> -->
+					      	<label for="wine">wine experience</label>
+					    </p>
+					    <p>
+					    	{% if front_manage %}
+								<input name="front_manage" type="checkbox" id="front_manage" value="yes" checked="checked" />
+							{% else %}
+								<input name="front_manage" type="checkbox" id="front_manage" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="front_manage" /> -->
+					      	<label for="front_manage">front of house management </label>
+					    </p>
+					    <p>
+					    	{% if cocktail %}
+								<input name="cocktail" type="checkbox" id="cocktail" value="yes" checked="checked" />
+							{% else %}
+								<input name="cocktail" type="checkbox" id="cocktail" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="cocktail" /> -->
+					      	<label for="cocktail">cocktail experience</label>
+					    </p>
+					    <p>
+					    	{% if silver %}
+								<input name="silver" type="checkbox" id="silver" value="yes" checked="checked" />
+							{% else %}
+								<input name="silver" type="checkbox" id="silver" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="silver" /> -->
+					      	<label for="silver">Silver Service experience</label>
+					    </p>
+					    <p>
+					    	{% if scullery %}
+								<input name="scullery" type="checkbox" id="scullery" value="yes" checked="checked" />
+							{% else %}
+								<input name="scullery" type="checkbox" id="scullery" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="scullery" /> -->
+					      	<label for="scullery">scullery experience</label>
+					    </p>
+					    <p>
+					    	{% if cook %}
+								<input name="cook" type="checkbox" id="cook" value="yes" checked="checked" />
+							{% else %}
+								<input name="cook" type="checkbox" id="cook" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="cook" /> -->
+					      	<label for="cook">chef/cooking experience</label>
+					    </p>
+					    <p>
+					    	{% if back_manage %}
+								<input name="back_manage" type="checkbox" id="back_manage" value="yes" checked="checked" />
+							{% else %}
+								<input name="back_manage" type="checkbox" id="back_manage" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="back_manage" /> -->
+					      	<label for="back_manage">back of house management </label>
+					    </p>
+					    <p>
+					    	{% if food_manage %}
+								<input name="food_manage" type="checkbox" id="food_manage" value="yes" checked="checked" />
+							{% else %}
+								<input name="food_manage" type="checkbox" id="food_manage" value="yes"/>
+							{% endif %}
+					      	<!-- <input type="checkbox" id="food_manage" /> -->
+					      	<label for="food_manage">food and beverage management</label>
+					    </p>
+					</div>
+				</div>
+
+				<div class="row hide-on-med-and-up">
+					<div class="col s12 center">
+						<input type="submit" value="Save and get Awesome Job Offers" class="btn"></input>
+					</div>
+				</div>
+				<div class="row hide-on-small-only">
+					<div class="col s12">
+						<input type="submit" value="Save and get Awesome Job Offers" class="btn"></input>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block script %}
+
+	<script type="text/javascript">
+		$("body").on("focusout", "#postal_code", function(){
+			function success(data){
+				console.log(data);
+				if ( data["area"] && data["postal_code_id"] ){
+					$("#postal_code_area").removeClass("hide");
+					$("#postal_code_area").removeClass("error");
+					$("#postal_code_area").text(data["area"][0].toUpperCase() + data["area"].slice(1));
+					$("#postal_code_id").val(data["postal_code_id"]);
+				}else{
+					$("#postal_code_area").removeClass("hide");
+					$("#postal_code_area").addClass("error");
+					$("#postal_code_area").text("Please provide a valid postal code");
+					$("#postal_code").val("");
+				};
+			};
+
+			$.ajax({
+				url: "/check_postal_code",
+				type: "get",
+				data: {"postal_code": $(this).val()},
+				success: success
+			})
+		});
+	</script>
+
+{% endblock %}
+
+
+
+

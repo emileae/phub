@@ -1,0 +1,320 @@
+@charset "UTF-8";
+
+// Mixins
+@import "components/prefixer";
+@import "components/mixins";
+@import "components/color";
+
+// Variables;
+@import "components/variables";
+
+// Reset
+@import "components/normalize";
+
+// components
+@import "components/global";
+@import "components/icons-material-design";
+@import "components/grid";
+@import "components/navbar";
+@import "components/roboto";
+@import "components/typography";
+@import "components/cards";
+@import "components/toast";
+@import "components/tabs";
+@import "components/tooltip";
+@import "components/buttons";
+@import "components/dropdown";
+@import "components/waves";
+@import "components/modal";
+@import "components/collapsible";
+@import "components/materialbox";
+@import "components/form";
+@import "components/table_of_contents";
+@import "components/sideNav";
+@import "components/preloader";
+@import "components/slider";
+@import "components/date_picker/default.scss";
+@import "components/date_picker/default.date.scss";
+@import "components/date_picker/default.time.scss";
+
+
+// =============================
+// Employee data files
+// =============================
+
+body{
+	background-image: url(/static/img/bg.png);
+}
+
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+label {
+	font-size: 1rem;
+}
+
+
+
+
+// =============================
+// Fonts
+// =============================
+/*@font-face {
+  font-family: 'FuturaStd';
+  src: url('/static/font/futura/Futura-Std.ttf') format('truetype'),
+}
+@font-face {
+  font-family: 'FuturaStdMedium';
+  src: url('/static/font/futura/FuturaStd-Medium.otf') format('opentype'),
+}*/
+@font-face {
+  font-family: 'Muli', sans-serif;
+}
+
+html, body {
+	font-family: Muli, Arial, sans-serif !important;
+}
+
+
+
+
+
+
+
+
+
+
+/* My styles */
+
+a {
+	color: $highlight-color;
+}
+
+/* Navigation */
+#magic-line { 
+	position: absolute; 
+	bottom: -2px; 
+	left: 0; 
+	width: 100px; 
+	height: 2px; 
+	background: #fe4902; 
+}
+nav ul li a.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+nav ul a,
+nav .brand-logo {
+  color: $primary-body-color;
+}
+
+nav{
+	box-shadow: none;
+	background-color: rgba(255,255,255,0.8)
+}
+
+.button-collapse {
+  color: $highlight-color !important;
+}
+
+.brand-logo{
+	height: 100%;
+}
+
+.brand-logo img{
+	max-height: 80%;
+}
+
+.highlight-item{
+	
+}
+.highlight-item:hover{
+	@extend .z-depth-2;
+	background: transparent;
+}
+
+/* - - - - GRID and sections - - - */
+
+.body_row{
+	padding-top: 5rem;
+	overflow: auto;
+}
+
+.body_row.grey{
+	background-color: $grey-bg !important;
+	color: $primary-body-color;
+}
+.body_row.white{
+	background-color: $white-bg;
+	color: $primary-body-color;
+}
+.body_row.highlight{
+	background-color: $highlight-color;
+	color: #fff;;
+}
+
+/* hero */
+
+.hero-top{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	/*background-image: url('/static/img/hf-bg-1.png');
+	background-repeat: repeat-x;*/
+	/*background-color: #fff;*/
+	color: $primary-body-color;
+}
+
+.hero-top{
+	.header{
+		padding: 5rem;
+	}
+}
+
+.hero-top div{
+	width: 100%;
+}
+
+.highlight{
+	color: $highlight-color;
+	font-size: 1.7em;
+}
+
+/*  - - - our work - - -  */
+.brand_icon{
+	height: 4rem;
+}
+
+.card .card-image.card-portfolio img {
+  /*min-width: 100%;*/
+  width: auto;
+  height: 15rem;
+}
+
+
+
+/*  - - - - - Contact - - - - -  */
+
+.contact-table td{
+	padding: 0px;
+}
+
+.card .card-action .contact-table a{
+	color: $highlight-color;
+	text-transform: lowercase;
+}
+
+
+/* - - - - - - footer  - - -- - */
+
+.social-icons-footer a{
+	font-size: 2.5rem;
+	margin-left: 1rem;
+}
+.social-icons-link i:hover{
+	@include transition(.3s);
+	color: $highlight-color;
+}
+
+footer.page-footer {
+  padding-top: 5rem;
+  margin-top: 0rem;
+}
+
+footer.page-footer .footer-copyright {
+  background-color: transparent;
+}
+
+#footer-fish path {
+	stroke-dasharray: 20;
+	animation: dash 3s infinite linear;
+	stroke: #fff;
+}
+
+
+
+/* --- utility --- */
+
+.pad-2-rem{
+	padding: 2rem;
+}
+.pad-bot-3{
+	padding-bottom: 3rem;
+}
+
+
+
+
+/* - - - - - -  MOBILE - - - - - - */
+
+@media #{$small-and-down} {
+    p{
+    text-align: center;
+    }
+    .header{
+    	text-align: center;
+    }
+}
+
+/*  - - - - - - CONTACT FORM - - - - - - */
+#thank_you{
+	font-size: 2rem;
+	height: 0px;
+	overflow: hidden; 
+	@include transition(.3s);
+}
+
+#thank_you_subscribe{
+	font-size: 2rem;
+	height: 0px;
+	overflow: hidden; 
+	@include transition(.3s);
+}
+#thank_you_unsubscribe{
+	font-size: 2rem;
+	height: 0px;
+	overflow: hidden; 
+	@include transition(.3s);
+}
+
+
+/*  - - - - - - - WORK styles - - - - - - - -  */
+
+.card-work{
+	img{
+		width: 100%;
+	}
+	height: 25rem;
+}
+
+/*  - - - - - - - BLOG STYLES - - - - - - - -  */
+
+.blog-post{
+	img{
+    	display: block;
+    	min-width: 100%;
+  	}
+  	overflow: hidden;
+}
+
+.cover-image-container img{
+	width: 100%;
+	height: auto;
+}
+
+.post-time{
+	font-size: 0.7rem;
+}
+
+
+
+
+
+
+
+
+
+
+

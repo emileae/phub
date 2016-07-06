@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% block main %}
+<div class="row valign valign-wrapper center">
+	<div class="col s12 valign">
+
+		<p>
+			Login to view your profile<br>
+		</p>
+
+		<form action="/login" method="post" id="login-form">
+
+		  <div class="form-row">
+		    <label>
+		      <span>Your Username/email</span>
+		      <input type="email" name="email" placeholder="you@example.com"/>
+		    </label>
+		  </div>
+
+		  <div class="form-row">
+		    <label>
+		      <span>Password</span>
+		      <input type="password" name="password"/>
+		    </label>
+		  </div>
+
+		  <button type="submit" class="btn">Login</button>
+
+		  {% if error_msg %}
+		  	<p style="color: red;">{{error_msg}}</p>
+		  {% endif %}
+
+		</form>
+
+	</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+	<script type="text/javascript">
+	</script>
+{% endblock %}
+

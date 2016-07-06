@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>PubHub</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic' rel='stylesheet' type='text/css'>
+
+  <!-- SEO stuff -->
+  <link href="https://pubhub.co.za/" rel="canonical" />
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="/static/img/logo.png" />
+
+
+  <!-- CSS  -->
+  <link href="/static/stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-69156295-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  <!-- Facebook tracking pixel -->
+  {% block fbpixel %}
+
+  <!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '779786798729614');
+fbq('track', "PageView");</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=779786798729614&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+  {% endblock %}
+
+</head>
+<body>
+<header>
+
+  {% block nav %}
+  <nav style="background-color: transparent;">
+    <div class="nav-wrapper">
+      <ul id="nav-mobile" class="right">
+        {% if user_obj %}
+          <li><a href="http://jobshiring.co.za" target="_blank">Go to main website</a></li>
+          <li><a href="/logout">Logout</a></li>
+        {% else %}
+          <li><a href="http://jobshiring.co.za" class="btn" target="_blank">Go to main website</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  {% endblock %}
+
+  <!-- <div class="row">
+    <div class="col right-align">
+      <a href="http://jobshiring.co.za" class="btn" target="_blank">Go to main website</a>
+    </div>
+  </div> -->
+</header>
+<main class="valign-wrapper">
+{% block main %}
+
+<div class="row valign valign-wrapper center">
+  <div class="col s12 valign">
+
+    <div class="row">
+      <div class="col s12 center">
+        <img src="/static/img/logo-3.png" style="max-height: 100px;">
+        <p class="white-text">Please sign up below to join the pubhub recruitment service.</p>
+        <a href="/confirm" class="btn btn-large waves-effect waves-light">Join</a>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 right-align">
+        <a href="/login" class="">Client Login</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  {% endblock %}
+</main>
+
+  <footer class="page-footer grey darken-2 text-white">
+    <div class="center">
+      <div class="row">
+        <div class="col l12 m12 s12">
+          <div class="white-text">
+            
+            &copy; Copyright <a href="http://the-greenhouse.co.za/" title="Advertising Agency Cape Town">The Greenhouse Advertising Agency </a><br>
+       For more information please contact <a href="mailto:support@pubhub.co.za">support@pubhub.co.za</a>
+        or see our <!-- <a href="https://www.facebook.com/notes/pubhub/pubhub-httpwwwjobshiringcoza-httpwwwpubhubcoza-privacy-policy/1487635131538161">Privacy Policy</a> -->
+         & <a href="http://www.jobshiring.co.za/privacy-policy/">Privacy Policy</a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-copyright">
+      <div class="container center">
+      <!-- &copy; PubHub {{year}}  --><!-- <a href="mailto:emile.esterhuizen@gmail.com">emile.esterhuizen@gmail.com</a> -->
+      <!-- &copy; Copyright <a href="http://the-greenhouse.co.za/" title="Advertising Agency Cape Town">The Greenhouse Advertising Agency </a>
+       - For more information please contact <a href="mailto:info@pubhub.co.za">info@pubhub.co.za</a>
+        or see our: <a href="https://www.facebook.com/notes/pubhub/pubhub-httpwwwjobshiringcoza-httpwwwpubhubcoza-privacy-policy/1487635131538161">Privacy Policy</a>
+         & <a href="https://www.facebook.com/notes/pubhub/promotional-competition-rules-for-staffrecruitment-competition/1487632724871735">Competition Terms and Conditions</a> -->
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="/static/js/materialize.min.js"></script>
+  <script src="/static/js/snap.svg-min.js"></script>
+  <script src="/static/js/init.js"></script>
+  <script type="text/javascript" src="/static/js/modernizr-custom.js"></script>
+
+  <!-- Style for a browser that doesn't support javascript -->
+  <style type="text/css">
+    /*.no-js [type="radio"]:not(:checked), [type="radio"]:checked {
+        position: relative;
+        left: 0px;
+        visibility: visible;
+    }*/
+    .no-js input[type="radio"] {
+        position: relative;
+        left: 0px;
+        visibility: visible;
+    }
+  </style>
+
+  {% block script %}
+    <script type="text/javascript" src="/static/js/ajax.js"></script>
+  {% endblock %}
+
+  </body>
+</html>

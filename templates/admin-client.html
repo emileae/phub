@@ -1,0 +1,30 @@
+{% extends "cms.html" %}
+
+{% block main %}
+
+	<div class="row">
+		<div class="col s12">
+			<h4>{{client.name|check_none}}</h4>
+			<h5>{{client.email}}</h5>
+			<p>{{client.postal_code}}</p>
+			<p>{{client.area}}</p>
+			<p>{{client.province}}</p>
+			{% if client.paid %}
+				<p>Subscribed, paid: {{client.date_paid|blog_date}}</p>
+				{% if client.stripeCustomerID %}
+				<p>Stripe customer ID: {{client.stripeCustomerID}}</p>
+				{% endif %}
+				{% if client.date_cancelled %}
+				<p>Cancelled on: {{client.date_cancelled|blog_date}}</p>
+				{% endif %}
+				{% if client.period_end %}
+				<p>Due for cancellation: {{client.period_end|blog_date}}</p>
+				{% endif %}
+			{% else %}
+				<p>Not subscribed</p>
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}
+

@@ -1,0 +1,91 @@
+{% extends "cms.html" %}
+
+{% block main %}
+
+	<div class="row">
+		<div class="col s12">
+			{% if location %}
+
+				<form method="post" action="/admin/locations">
+					<div class="row">
+				        <div class="input-field col s6">
+				          <input id="city" name="city" type="text" class="validate active" value="{{location.city|check_none}}">
+				          <label for="first_name">City</label>
+				        </div>
+				        <div class="input-field col s6">
+				          <input id="province" name="province" type="text" class="validate active" value="{{location.province|check_none}}">
+				          <label for="province">Province</label>
+				        </div>
+			      	</div>
+
+			      	<div class="row">
+			      		<div class="col s12 center">
+			      			<input type="checkbox" id="delete" name="delete" value="{{location.key.id()}}" />
+      						<label for="delete">Delete?</label>
+			      		</div>
+			      	</div>
+
+			      	<div class="row">
+			      		<div class="col s12">
+			      			<button class="btn">Save</button>
+			      		</div>
+			      	</div>
+				</form>
+
+			{% else %}
+				<form method="post" action="/admin/locations">
+					<div class="row">
+				        <div class="input-field col s6">
+				          <input id="city" name="city" type="text" class="validate">
+				          <label for="first_name">City</label>
+				        </div>
+				        <div class="input-field col s6">
+				          <input id="province" name="province" type="text" class="validate">
+				          <label for="province">Province</label>
+				        </div>
+			      	</div>
+
+			      	<div class="row">
+			      		<div class="col s12">
+			      			<button class="btn">Save</button>
+			      		</div>
+			      	</div>
+				</form>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12">
+			{% if locations %}
+			<table>
+		        <thead>
+		          <tr>
+		              <th data-field="city">City</th>
+		              <th data-field="suburb">Suburb</th>
+		              <th data-field="province">Province</th>
+		              <th data-field="edit">Edit</th>
+		          </tr>
+		        </thead>
+
+		        <tbody>
+		        	{% for l in locations %}
+			          	<tr>
+			            	<td>{{l.city|space_capitalize}}</td>
+			            	<td>{{l.suburb|space_capitalize}}</td>
+			            	<td>{{l.province|space_capitalize}}</td>
+			            	<td>
+			            		<a href="/admin/locations?location_id={{l.key.id()}}" class="btn">Edit</a>
+			            	</td>
+			          	</tr>
+		          	{% endfor %}
+		        </tbody>
+	      	</table>
+	      	{% else %}
+	      		<p>No locations</p>
+	      	{% endif %}
+		</div>
+	</div>
+
+{% endblock %}
+

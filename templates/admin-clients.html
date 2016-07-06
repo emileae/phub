@@ -1,0 +1,57 @@
+{% extends "cms.html" %}
+
+{% block main %}
+
+	<div class="row">
+		<div class="col s12 text-right">
+			<form method="get" action="/admin/clients">
+				<div class="row">
+					<div class="input-field col s12 m6 offset-m3">
+			          	<input id="email" name="email" type="text">
+			          	<label for="email">Type an email address</label>
+			          	<br>
+			          	<button class="waves-effect waves-light btn">Search</button> <a href="/admin/clients" class="waves-effect waves-light btn">Search All</a>
+		        	</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col s12">
+			{% if clients %}
+			<table>
+		        <thead>
+		          <tr>
+		          		<th data-field="id">System ID</th>
+		              	<th data-field="city">Name</th>
+		              	<th data-field="suburb">Email</th>
+		              	<th data-field="paid">Paid</th>
+		              	<th data-field="city">Postal Code</th>
+		              	<th data-field="edit">Edit</th>
+		          </tr>
+		        </thead>
+
+		        <tbody>
+		        	{% for e in clients %}
+			          	<tr>
+			            	<td>{{e.key.id()}}</td>
+			            	<td>{{e.name}}</td>
+			            	<td>{{e.email}}</td>
+			            	<td>{{e.paid}}</td>
+			            	<td>{{e.postal_code}}</td>
+			            	<td>
+			            		<a href="/admin/client/{{e.key.id()}}" class="btn">Edit</a>
+			            	</td>
+			          	</tr>
+		          	{% endfor %}
+		        </tbody>
+	      	</table>
+	      	{% else %}
+	      		<p>No clients yet</p>
+	      	{% endif %}
+		</div>
+	</div>
+
+{% endblock %}
+
